@@ -4,10 +4,28 @@ using namespace std;
 
 void nhap(int *a, int n)
 {
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         cin >> a[i];
     }
+}
+
+void Chen(int a[], int &n, int x)
+{
+    int k;
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] < x)
+        {
+            k = i + 1;
+        }
+    }
+    for (int i = n; i > k; i--)
+    {
+        a[i] = a[i - 1];
+    }
+    a[k] = x;
+    ++n;
 }
 
 int main()
@@ -15,28 +33,16 @@ int main()
     int n;
     int m;
     cin >> n >> m;
-    int *a = new int[n];
-    int *b = new int[m];
-    nhap(a,n);
-    nhap(b,m);
-    int *c = new int[m + n];
-    for(int i = 0; i < n; i++){
-        c[i] = a[i];
-    }
-    for(int i = n; i < m+n; i++){
-        c[i] = b[i-n];
-    }
-    for(int i = 0; i < n + m; i++)
+    int a[100];
+    int b[100];
+    nhap(a, n);
+    nhap(b, m);
+    for (int i = 0; i < n; i++)
     {
-        for(int j = i+1; j < n + m; j++)
-        {
-            if(c[i] > c[j])
-            {
-                swap(c[i], c[j]);
-            }
-        }
+        Chen(b, m, a[i]);
     }
-    for(int i = 0; i < m + n; i++){
-        cout << c[i] << " ";
+    for (int i = 0; i < m; i++)
+    {
+        cout << b[i] << " ";
     }
 }
